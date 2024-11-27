@@ -31,7 +31,30 @@ public class PessoaDAO {
     ps.close();
     //by Isabel Santos
   }
+  public void atualizar(Pessoa p) throws Exception{
+    var sql = "UPDATE tb_pessoa SET nome='?' SET fone='?' SET email='?' WHERE cod_pessoa='?'; ";
+    try(var conexao = ConnectionFactory.conectar()){
+      var ps = conexao.prepareStatement(sql);
+      
+      ps.setInt(4, p.getCodigo());
+      
+      ps.setString(1,"nome");
+      ps.setString(2,"fone");
+      ps.setString(3,"email");
+      
+      
+      ps.execute();
 
+      ps.close();
+    }
+  }
+
+
+
+
+
+
+  }
   public List <Pessoa> listar() throws Exception{
     var pessoas = new ArrayList<Pessoa>();
     var sql = "SELECT * FROM tb_pessoa";
@@ -50,4 +73,4 @@ public class PessoaDAO {
       return pessoas;
     }
   }
-}
+}   
