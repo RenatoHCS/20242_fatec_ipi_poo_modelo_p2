@@ -20,13 +20,35 @@ public class App {
             }
             case 2:{
               var pessoas = new PessoaDAO().listar();
-              JOptionPane.showMessageDialog(null, pessoas);
+              JOptionPane.showMessageDialog(null,pessoas);
               break;
             }
             case 3:{
-              //capturar codigo, nome fone e e-mail
-              //atualizar nome, fone e e-mail pessoa cujo codigo foi especificado
-            }
+                int codigo = Integer.parseInt(JOptionPane.showInputDialog(
+                  "digite o código da pessoa a ser atualizada:\n"));
+                    PessoaDAO dao = new PessoaDAO();
+                      Pessoa pessoa = dao.atualizar(codigo);
+
+                      if(pessoa!= null){
+                        var nome =JOptionPane.showInputDialog("Novo nome:",pessoa.getNome());
+                        var fone =JOptionPane.showInputDialog("Novo nome:",pessoa.getFone());
+                        var email =JOptionPane.showInputDialog("Novo nome:",pessoa.getEmail());
+
+                        pessoa.setNome(nome);
+                        pessoa.setFone(fone);
+                        pessoa.setEmail(email);
+                        dao.atualizar(pessoa);
+
+                        JOptionPane.showMessageDialog(null, "atualização realizada");
+                      }else{
+
+                        JOptionPane.showMessageDialog(null,"Pessoa não encontrada");
+
+                      }
+
+                      }
+                    
+            
             case 4: {
               var codigo = Integer.parseInt(
                 JOptionPane.showInputDialog("Código?")
